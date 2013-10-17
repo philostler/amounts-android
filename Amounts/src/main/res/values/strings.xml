@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Amounts</string>
+    <string name="action_about">About</string>
+    <string name="title_activity_about">About</string>
+
+    <string-array name="main_categories_titles">
+        <!--item>Area</item>
+        <item>Energy</item>
+        <item>Data</item>
+        <item>Distance</item-->
+        <item>Speed</item>
+        <!--item>Weight</item>
+        <item>Volume</item-->
+    </string-array>
+
+    <!--string-array name="speed_conversions_titles">
+        <item>MILES PER HOUR</item>
+        <item>KILOMETERS PER HOUR</item>
+    </string-array-->
+</resources>
