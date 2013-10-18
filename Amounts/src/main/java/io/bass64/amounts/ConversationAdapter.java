@@ -18,10 +18,6 @@ public class ConversationAdapter<T> extends ArrayAdapter {
         super(context, resource, textViewResourceId, objects);
     }
 
-    public ConversationAdapter(Context context, int resource, List objects) {
-        super(context, resource, objects);
-    }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = super.getView(position, convertView, parent);

@@ -86,9 +86,6 @@ public class MainActivity extends Activity {
                     TextView valueToConvert = (TextView)findViewById(R.id.valueToConvert);
                     ArrayList<ConversationResult> result = conversation.generate(Double.valueOf(valueToConvert.getText().toString()), null);
 
-                    //ArrayAdapter adapter = new ArrayAdapter<ConversationResult>(getApplicationContext(),
-                    //                                                            R.layout.list_view_item, R.id.unitOfMeasure,
-                    //                                                            result);
                     ConversationAdapter adapter = new ConversationAdapter<ConversationResult>(getApplicationContext(),
                                                                                               R.layout.list_view_item, R.id.unitOfMeasure,
                                                                                               result);
