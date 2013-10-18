@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import io.bass64.amounts.ConversationAdapter;
 import io.bass64.amounts.R;
+import io.bass64.amounts.main.MainActivity;
 import io.bass64.amounts.models.ConversationResult;
 import io.bass64.amounts.models.conversation.group.ConversationGroupModel;
 import io.bass64.amounts.models.conversation.group.IConversationGroup;
@@ -24,17 +25,15 @@ import roboguice.RoboGuice;
  * @author Phil Ostler - Bass64 Ltd
  */
 public class CategoriesListViewOnItemClickListener implements AdapterView.OnItemClickListener {
+    public MainActivity activity;
+
     @Inject
     public ConversationGroupModel model;
 
-    private Activity activity;
-    private Context context;
+    public CategoriesListViewOnItemClickListener(MainActivity activity) {
+        this.activity = activity;
 
-    public CategoriesListViewOnItemClickListener(Context context) {
-        this.activity = (Activity)context;
-        this.context = context;
-
-        RoboGuice.getInjector(context).injectMembersWithoutViews(this);
+        RoboGuice.getInjector(activity).injectMembersWithoutViews(this);
     }
 
     @Override
@@ -45,17 +44,17 @@ public class CategoriesListViewOnItemClickListener implements AdapterView.OnItem
             TextView valueToConvert = (TextView)activity.findViewById(R.id.valueToConvert);
             ArrayList<ConversationResult> result = model.conversationGroup.generate(Double.valueOf(valueToConvert.getText().toString()), null);
 
-            ConversationAdapter adapter = new ConversationAdapter<ConversationResult>(context,
-                    R.layout.list_view_item, R.id.unitOfMeasure,
-                    result);
+            ConversationAdapter adapter = new ConversationAdapter<ConversationResult>(activity,
+                                                                                      R.layout.list_view_item, R.id.unitOfMeasure,
+                                                                                      result);
             ListView conversions = (ListView)activity.findViewById(R.id.conversions);
             conversions.setAdapter(adapter);
 
             activity.getActionBar().setDisplayHomeAsUpEnabled(true);
 
             ViewFlipper flipper = (ViewFlipper)activity.findViewById(R.id.ccFlipper);
-            flipper.setInAnimation(context, R.anim.slide_in_from_right);
-            flipper.setOutAnimation(context, R.anim.slide_out_to_left);
+            flipper.setInAnimation(activity, R.anim.slide_in_from_right);
+            flipper.setOutAnimation(activity, R.anim.slide_out_to_left);
             flipper.showNext();
     }
 
