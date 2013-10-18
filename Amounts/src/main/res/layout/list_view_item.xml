@@ -9,9 +9,8 @@
               android:layout_alignParentLeft="true"
               android:layout_height="wrap_content"
               android:layout_width="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="10pt">
-
+              android:textColor="@color/black"
+              android:textSize="10pt">
     </TextView>
 
     <!-- Converted value -->
@@ -19,7 +18,9 @@
               android:layout_alignParentRight="true"
               android:layout_height="wrap_content"
               android:layout_width="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="10pt">
+              android:textColor="@color/black"
+              android:textSize="10pt"
+        android:background="@drawable/converted_value_background"
+        android:padding="5px">
     </TextView>
 </RelativeLayout>
