@@ -1,11 +1,10 @@
 package io.bass64.amounts;
 
-import android.graphics.Typeface;
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
 import android.widget.TextView;
 
 import io.bass64.amounts.utils.FontUtils;

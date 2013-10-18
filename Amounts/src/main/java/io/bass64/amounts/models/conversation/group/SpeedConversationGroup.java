@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import io.bass64.amounts.models.AvailableUnits;
 import io.bass64.amounts.models.ConversationResult;
-import io.bass64.amounts.models.conversation.group.IConversationGroup;
 
 /**
  * Created by philostler on 17/10/13.
@@ -14,7 +13,7 @@ public class SpeedConversationGroup implements IConversationGroup {
     public ArrayList<ConversationResult> generate(double value, AvailableUnits units) {
         if(units == null) units = AvailableUnits.MILES_PER_HOUR;
 
-        ArrayList<ConversationResult> result = null;
+        ArrayList<ConversationResult> result;
 
         switch(units) {
             case MILES_PER_HOUR:

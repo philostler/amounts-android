@@ -7,24 +7,22 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-import com.google.inject.Inject;
-
 import io.bass64.amounts.AboutActivity;
 import io.bass64.amounts.R;
-import io.bass64.amounts.main.listeners.CategoriesListViewOnItemClickListener;
-import io.bass64.amounts.models.conversation.group.ConversationGroupModel;
+import io.bass64.amounts.main.listeners.GroupsListViewOnItemClickListener;
+import io.bass64.amounts.main.listeners.UnitsListViewOnItemClickListener;
 import io.bass64.amounts.utils.FontUtils;
 import roboguice.activity.RoboActivity;
+import roboguice.inject.InjectView;
 
 public class MainActivity extends RoboActivity {
-    @Inject
-    public ConversationGroupModel conversationGroupModel;
+    @InjectView(R.id.groups_list_view) ListView groupsListView;
+    @InjectView(R.id.units_list_view) ListView unitsListView;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -58,7 +56,7 @@ public class MainActivity extends RoboActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                ViewFlipper flipper = (ViewFlipper)findViewById(R.id.ccFlipper);
+                ViewFlipper flipper = (ViewFlipper)findViewById(R.id.groups_units_view_flipper);
                 if(editable.toString().length() > 0) {
                     flipper.setVisibility(View.VISIBLE);
                 } else {
@@ -68,29 +66,13 @@ public class MainActivity extends RoboActivity {
         });
         FontUtils.setFont(this, valueToConvert);
 
-        // Categories ListView
+        // Groups List View
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.main_categories_titles));
-        ListView categoriesListView = (ListView)findViewById(R.id.categories_list_view);
-        categoriesListView.setAdapter(adapter);
-        categoriesListView.setOnItemClickListener(new CategoriesListViewOnItemClickListener(this));
+        groupsListView.setAdapter(adapter);
+        groupsListView.setOnItemClickListener(new GroupsListViewOnItemClickListener(this));
 
-        //
-        setupConversions();
-    }
-
-    private void setupConversions() {
-        ListView listView = (ListView)findViewById(R.id.conversions);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ViewFlipper flipper = (ViewFlipper)findViewById(R.id.ccFlipper);
-                flipper.setInAnimation(getApplicationContext(), R.anim.slide_in_from_left);
-                flipper.setOutAnimation(getApplicationContext(), R.anim.slide_out_to_right);
-                flipper.showPrevious();
-
-                getActionBar().setDisplayHomeAsUpEnabled(false);
-            }
-        });
+        // Units List View
+        unitsListView.setOnItemClickListener(new UnitsListViewOnItemClickListener(this));
     }
 
     private void openAbout() {

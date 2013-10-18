@@ -23,7 +23,7 @@
     <ViewFlipper
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ccFlipper"
+        android:id="@+id/groups_units_view_flipper"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/valueToConvert"
@@ -32,14 +32,14 @@
         <ListView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/categories_list_view"
+            android:id="@+id/groups_list_view"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"/>
 
         <ListView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/conversions"
+            android:id="@+id/units_list_view"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"/>
     </ViewFlipper>

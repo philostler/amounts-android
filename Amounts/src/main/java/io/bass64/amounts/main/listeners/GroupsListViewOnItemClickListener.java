@@ -1,7 +1,5 @@
 package io.bass64.amounts.main.listeners;
 
-import android.app.Activity;
-import android.content.Context;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -19,18 +17,18 @@ import io.bass64.amounts.models.ConversationResult;
 import io.bass64.amounts.models.conversation.group.ConversationGroupModel;
 import io.bass64.amounts.models.conversation.group.IConversationGroup;
 import roboguice.RoboGuice;
+import roboguice.inject.InjectView;
 
 /**
- * Item click listener for Categories ListView in Main Activity
+ * Item click listener for Groups ListView in Main Activity
  * @author Phil Ostler - Bass64 Ltd
  */
-public class CategoriesListViewOnItemClickListener implements AdapterView.OnItemClickListener {
+public class GroupsListViewOnItemClickListener implements AdapterView.OnItemClickListener {
     public MainActivity activity;
 
-    @Inject
-    public ConversationGroupModel model;
+    @Inject ConversationGroupModel model;
 
-    public CategoriesListViewOnItemClickListener(MainActivity activity) {
+    public GroupsListViewOnItemClickListener(MainActivity activity) {
         this.activity = activity;
 
         RoboGuice.getInjector(activity).injectMembersWithoutViews(this);
@@ -47,15 +45,15 @@ public class CategoriesListViewOnItemClickListener implements AdapterView.OnItem
             ConversationAdapter adapter = new ConversationAdapter<ConversationResult>(activity,
                                                                                       R.layout.list_view_item, R.id.unitOfMeasure,
                                                                                       result);
-            ListView conversions = (ListView)activity.findViewById(R.id.conversions);
+            ListView conversions = (ListView)activity.findViewById(R.id.units_list_view);
             conversions.setAdapter(adapter);
 
             activity.getActionBar().setDisplayHomeAsUpEnabled(true);
 
-            ViewFlipper flipper = (ViewFlipper)activity.findViewById(R.id.ccFlipper);
-            flipper.setInAnimation(activity, R.anim.slide_in_from_right);
-            flipper.setOutAnimation(activity, R.anim.slide_out_to_left);
-            flipper.showNext();
+            ViewFlipper groupsUnitsViewFlipper = (ViewFlipper)activity.findViewById(R.id.groups_units_view_flipper);
+            groupsUnitsViewFlipper.setInAnimation(activity, R.anim.slide_in_from_right);
+            groupsUnitsViewFlipper.setOutAnimation(activity, R.anim.slide_out_to_left);
+            groupsUnitsViewFlipper.showNext();
     }
 
     private IConversationGroup instantiateConversationGroup(String type) {
