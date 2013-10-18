@@ -14,15 +14,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.google.inject.Inject;
+
 import io.bass64.amounts.AboutActivity;
 import io.bass64.amounts.R;
 import io.bass64.amounts.main.listeners.CategoriesListViewOnItemClickListener;
 import io.bass64.amounts.models.conversation.group.ConversationGroupModel;
-import io.bass64.amounts.models.conversation.group.IConversationGroup;
 import io.bass64.amounts.utils.FontUtils;
+import roboguice.activity.RoboActivity;
 
-public class MainActivity extends Activity {
-    private ConversationGroupModel conversationGroupModel = new ConversationGroupModel();
+public class MainActivity extends RoboActivity {
+    @Inject
+    public ConversationGroupModel conversationGroupModel;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,7 +73,7 @@ public class MainActivity extends Activity {
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.main_categories_titles));
         ListView categoriesListView = (ListView)findViewById(R.id.categories_list_view);
         categoriesListView.setAdapter(adapter);
-        categoriesListView.setOnItemClickListener(new CategoriesListViewOnItemClickListener(this, conversationGroupModel));
+        categoriesListView.setOnItemClickListener(new CategoriesListViewOnItemClickListener(this));
 
         //
         setupConversions();

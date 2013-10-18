@@ -8,6 +8,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.google.inject.Inject;
+
 import java.util.ArrayList;
 
 import io.bass64.amounts.ConversationAdapter;
@@ -15,20 +17,24 @@ import io.bass64.amounts.R;
 import io.bass64.amounts.models.ConversationResult;
 import io.bass64.amounts.models.conversation.group.ConversationGroupModel;
 import io.bass64.amounts.models.conversation.group.IConversationGroup;
+import roboguice.RoboGuice;
 
 /**
  * Item click listener for Categories ListView in Main Activity
  * @author Phil Ostler - Bass64 Ltd
  */
 public class CategoriesListViewOnItemClickListener implements AdapterView.OnItemClickListener {
+    @Inject
+    public ConversationGroupModel model;
+
     private Activity activity;
     private Context context;
-    private ConversationGroupModel model;
 
-    public CategoriesListViewOnItemClickListener(Context context, ConversationGroupModel model) {
+    public CategoriesListViewOnItemClickListener(Context context) {
         this.activity = (Activity)context;
         this.context = context;
-        this.model = model;
+
+        RoboGuice.getInjector(context).injectMembersWithoutViews(this);
     }
 
     @Override
