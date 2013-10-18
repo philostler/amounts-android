@@ -11,4 +11,8 @@ public class ConversationResult {
         this.title = title;
         this.value = value;
     }
+
+    public String toString() {
+        return title + " => " + value;
+    }
 }

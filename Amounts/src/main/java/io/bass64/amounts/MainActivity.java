@@ -87,8 +87,7 @@ public class MainActivity extends Activity {
                     ArrayList<ConversationResult> result = conversation.generate(Double.valueOf(valueToConvert.getText().toString()), null);
 
                     ArrayAdapter adapter = new ArrayAdapter<ConversationResult>(getApplicationContext(),
-                                                                                android.R.layout.simple_list_item_1,
-                                                                                //R.layout.list_view_item,
+                                                                                R.layout.list_view_item, R.id.unitOfMeasure,
                                                                                 result);
                     ListView conversions = (ListView)findViewById(R.id.conversions);
                     conversions.setAdapter(adapter);
