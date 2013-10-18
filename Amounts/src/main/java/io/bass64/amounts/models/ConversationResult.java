@@ -13,6 +13,6 @@ public class ConversationResult {
     }
 
     public String toString() {
-        return title + " => " + value;
+        return title;
     }
 }
