@@ -3,9 +3,10 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-    android:padding="5pt">
-    <!-- Unit of measure -->
-    <TextView android:id="@+id/unitOfMeasure"
+                android:padding="5pt">
+
+    <!-- Units Long Name -->
+    <TextView android:id="@+id/units_long_name"
               android:layout_alignParentLeft="true"
               android:layout_height="wrap_content"
               android:layout_width="wrap_content"
@@ -13,14 +14,14 @@
               android:textSize="10pt">
     </TextView>
 
-    <!-- Converted value -->
-    <TextView android:id="@+id/convertedValue"
+    <!-- Converted Value -->
+    <TextView android:id="@+id/converted_value"
               android:layout_alignParentRight="true"
               android:layout_height="wrap_content"
               android:layout_width="wrap_content"
               android:textColor="@color/black"
               android:textSize="10pt"
-        android:background="@drawable/converted_value_background"
-        android:padding="5px">
+              android:background="@drawable/converted_value_background"
+              android:padding="5px">
     </TextView>
 </RelativeLayout>

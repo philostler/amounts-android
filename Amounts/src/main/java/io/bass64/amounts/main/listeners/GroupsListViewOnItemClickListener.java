@@ -10,14 +10,13 @@ import com.google.inject.Inject;
 
 import java.util.ArrayList;
 
-import io.bass64.amounts.ConversationAdapter;
+import io.bass64.amounts.main.adapters.UnitsListViewAdapter;
 import io.bass64.amounts.R;
 import io.bass64.amounts.main.MainActivity;
 import io.bass64.amounts.models.ConversationResult;
 import io.bass64.amounts.models.conversation.group.ConversationGroupModel;
 import io.bass64.amounts.models.conversation.group.IConversationGroup;
 import roboguice.RoboGuice;
-import roboguice.inject.InjectView;
 
 /**
  * Item click listener for Groups ListView in Main Activity
@@ -42,11 +41,11 @@ public class GroupsListViewOnItemClickListener implements AdapterView.OnItemClic
             TextView valueToConvert = (TextView)activity.findViewById(R.id.valueToConvert);
             ArrayList<ConversationResult> result = model.conversationGroup.generate(Double.valueOf(valueToConvert.getText().toString()), null);
 
-            ConversationAdapter adapter = new ConversationAdapter<ConversationResult>(activity,
-                                                                                      R.layout.list_view_item, R.id.unitOfMeasure,
+            UnitsListViewAdapter adapter = new UnitsListViewAdapter<ConversationResult>(activity,
+                                                                                      R.layout.units_list_view_item, R.id.units_long_name,
                                                                                       result);
-            ListView conversions = (ListView)activity.findViewById(R.id.units_list_view);
-            conversions.setAdapter(adapter);
+            ListView unitsListView = (ListView)activity.findViewById(R.id.units_list_view);
+            unitsListView.setAdapter(adapter);
 
             activity.getActionBar().setDisplayHomeAsUpEnabled(true);
 

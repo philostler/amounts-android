@@ -4,15 +4,15 @@ package io.bass64.amounts.models;
  * Created by philostler on 17/10/13.
  */
 public class ConversationResult {
-    public String title;
+    public Units unit;
     public double value;
 
-    public ConversationResult(String title, double value) {
-        this.title = title;
+    public ConversationResult(Units unit, double value) {
+        this.unit = unit;
         this.value = value;
     }
 
     public String toString() {
-        return title;
+        return unit.name();
     }
 }
