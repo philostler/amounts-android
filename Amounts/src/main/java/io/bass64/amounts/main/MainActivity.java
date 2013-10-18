@@ -1,4 +1,4 @@
-package io.bass64.amounts;
+package io.bass64.amounts.main;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,14 +14,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-import java.util.ArrayList;
-
-import io.bass64.amounts.models.ConversationResult;
-import io.bass64.amounts.models.IConversation;
+import io.bass64.amounts.AboutActivity;
+import io.bass64.amounts.R;
+import io.bass64.amounts.main.listeners.CategoriesListViewOnItemClickListener;
+import io.bass64.amounts.models.conversation.group.ConversationGroupModel;
+import io.bass64.amounts.models.conversation.group.IConversationGroup;
 import io.bass64.amounts.utils.FontUtils;
 
 public class MainActivity extends Activity {
-    private IConversation conversation;
+    private ConversationGroupModel conversationGroupModel = new ConversationGroupModel();
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -65,52 +66,17 @@ public class MainActivity extends Activity {
         });
         FontUtils.setFont(this, valueToConvert);
 
-        setupCategories();
+        // Categories ListView
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.main_categories_titles));
+        ListView categoriesListView = (ListView)findViewById(R.id.categories_list_view);
+        categoriesListView.setAdapter(adapter);
+        categoriesListView.setOnItemClickListener(new CategoriesListViewOnItemClickListener(this, conversationGroupModel));
+
+        //
         setupConversions();
     }
 
-    private void setupCategories() {
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                                                        android.R.layout.simple_list_item_1,
-                                                        getResources().getStringArray(R.array.main_categories_titles));
-        ListView listView = (ListView)findViewById(R.id.categories);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                try {
-                    String selectedItem = ((TextView)view).getText().toString();
-                    Class klass = Class.forName("io.bass64.amounts.models." + selectedItem + "Conversation");
-                    conversation = (IConversation)klass.newInstance();
-
-                    TextView valueToConvert = (TextView)findViewById(R.id.valueToConvert);
-                    ArrayList<ConversationResult> result = conversation.generate(Double.valueOf(valueToConvert.getText().toString()), null);
-
-                    ConversationAdapter adapter = new ConversationAdapter<ConversationResult>(getApplicationContext(),
-                                                                                              R.layout.list_view_item, R.id.unitOfMeasure,
-                                                                                              result);
-                    ListView conversions = (ListView)findViewById(R.id.conversions);
-                    conversions.setAdapter(adapter);
-
-                    getActionBar().setDisplayHomeAsUpEnabled(true);
-
-                    ViewFlipper flipper = (ViewFlipper)findViewById(R.id.ccFlipper);
-                    flipper.setInAnimation(getApplicationContext(), R.anim.slide_in_from_right);
-                    flipper.setOutAnimation(getApplicationContext(), R.anim.slide_out_to_left);
-                    flipper.showNext();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
     private void setupConversions() {
-
         ListView listView = (ListView)findViewById(R.id.conversions);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

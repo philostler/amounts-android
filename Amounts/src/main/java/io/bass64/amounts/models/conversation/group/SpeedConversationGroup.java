@@ -1,11 +1,15 @@
-package io.bass64.amounts.models;
+package io.bass64.amounts.models.conversation.group;
 
 import java.util.ArrayList;
+
+import io.bass64.amounts.models.AvailableUnits;
+import io.bass64.amounts.models.ConversationResult;
+import io.bass64.amounts.models.conversation.group.IConversationGroup;
 
 /**
  * Created by philostler on 17/10/13.
  */
-public class SpeedConversation implements IConversation {
+public class SpeedConversationGroup implements IConversationGroup {
     @Override
     public ArrayList<ConversationResult> generate(double value, AvailableUnits units) {
         if(units == null) units = AvailableUnits.MILES_PER_HOUR;

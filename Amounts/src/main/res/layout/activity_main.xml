@@ -32,7 +32,7 @@
         <ListView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/categories"
+            android:id="@+id/categories_list_view"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"/>
 
